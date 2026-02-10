@@ -20,11 +20,11 @@ class ProblemCategory(str, Enum):
     """Catégories de problèmes"""
     COMPLEXITY = "complexity"
     LENGTH = "length"
-    NESTING = "nesting"
-    NAMING = "naming"
+    NESTING = "nesting" # Imbrication excessive
+    NAMING = "naming"  # Nommage non conforme
     DOCUMENTATION = "documentation"
-    SECURITY = "security"
-    PERFORMANCE = "performance"
+    SECURITY = "security"  # Faille de sécurité
+    PERFORMANCE = "performance" # Problème de performance
     STYLE = "style"
 
 
@@ -60,12 +60,12 @@ class CodeProblem(BaseModel):
     
     def __str__(self):
         severity_emoji = {
-            ProblemSeverity.INFO: "ℹ️",
-            ProblemSeverity.WARNING: "⚠️",
-            ProblemSeverity.ERROR: "❌",
-            ProblemSeverity.CRITICAL: "🔴"
+            ProblemSeverity.INFO: "info:",
+            ProblemSeverity.WARNING: "warning:",
+            ProblemSeverity.ERROR: " error:",
+            ProblemSeverity.CRITICAL: " critical:"
         }
-        emoji = severity_emoji.get(self.severity, "⚠️")
+        emoji = severity_emoji.get(self.severity, " ")
         return f"{emoji} {self.message} ({self.category.value})"
 
 
